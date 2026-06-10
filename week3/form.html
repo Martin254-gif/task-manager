@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form with Validation</title>
+    <style>
+        body { font-family: Arial; margin: 50px; }
+        .error { color: red; font-size: 14px; }
+        input, button { padding: 8px; margin: 5px 0; width: 250px; }
+        button { background-color: #3498db; color: white; border: none; cursor: pointer; }
+        .container { border: 1px solid #ccc; padding: 20px; width: 300px; margin: auto; border-radius: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Login Form</h2>
+    <form id="loginForm" method="post" action="process.php">
+        Email: <input type="text" id="email" name="email"><br>
+        <div id="emailError" class="error"></div>
+
+        Password: <input type="password" id="password" name="password" onkeyup="checkStrength()"><br>
+        <div id="strengthMsg" style="font-weight: bold;"></div>
+        <div id="pwdError" class="error"></div>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<script>
+    // Password strength checker
+    function checkStrength() {
+        let pwd = document.getElementById('password').value;
+        let msg = document.getElementById('strengthMsg');
+        if (pwd.length === 0) {
+            msg.innerHTML = "";
+        } else if (pwd.length < 4) {
+            msg.innerHTML = "Weak";
+            msg.style.color = "red";
+        } else if (pwd.length < 8) {
+            msg.innerHTML = "Medium";
+            msg.style.color = "orange";
+        } else {
+            msg.innerHTML = "Strong";
+            msg.style.color = "green";
+        }
+    }
+
+    // Form validation
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        let valid = true;
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+
+        if (email === "") {
+            document.getElementById('emailError').innerText = "Email is required";
+            valid = false;
+        } else if (!email.includes("@")) {
+            document.getElementById('emailError').innerText = "Email must contain @";
+            valid = false;
+        } else {
+            document.getElementById('emailError').innerText = "";
+        }
+
+        if (password === "") {
+            document.getElementById('pwdError').innerText = "Password is required";
+            valid = false;
+        } else if (password.length < 4) {
+            document.getElementById('pwdError').innerText = "Minimum 4 characters";
+            valid = false;
+        } else {
+            document.getElementById('pwdError').innerText = "";
+        }
+
+        if (!valid) event.preventDefault();
+    });
+</script>
+</body>
+</html>

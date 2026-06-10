@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Task</title>
+    <style>
+        body { font-family: Arial; margin: 50px; }
+        input, select, button { padding: 8px; margin: 5px; width: 250px; }
+        button { background-color: green; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Add New Task</h2>
+    <form method="post" action="insert_task.php">
+        Task Name: <input type="text" name="task_name" required><br>
+        Due Date: <input type="date" name="due_date"><br>
+        Status: 
+        <select name="status">
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+        </select><br>
+        <button type="submit">Save Task</button>
+    </form>
+    <br>
+    <a href="dashboard.php">← Back to Dashboard</a>
+</body>
+</html>
